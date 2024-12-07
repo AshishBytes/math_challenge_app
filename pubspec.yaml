@@ -5,8 +5,9 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.5.4
+  sdk: ">=3.5.4 <4.0.0"
 
+dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
@@ -26,3 +27,6 @@ flutter:
     - family: BubblegumSans
       fonts:
         - asset: assets/fonts/BubblegumSans-Regular.ttf
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
