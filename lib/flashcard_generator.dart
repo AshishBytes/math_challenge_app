@@ -145,7 +145,6 @@ List<Flashcard> generateDivisionFlashcards(int numberOfFlashcards) {
 List<Flashcard> generateCombinedFlashcards(int numberOfFlashcards) {
   List<Flashcard> flashcards = [];
 
-  // Adjust the distribution of flashcards for different varieties
   int additionCount = (numberOfFlashcards * 0.25).round();
   int subtractionCount = (numberOfFlashcards * 0.25).round();
   int multiplicationCount = (numberOfFlashcards * 0.25).round();
@@ -156,7 +155,6 @@ List<Flashcard> generateCombinedFlashcards(int numberOfFlashcards) {
   flashcards.addAll(generateMultiplicationFlashcards(multiplicationCount));
   flashcards.addAll(generateDivisionFlashcards(divisionCount));
 
-  // Shuffle the combined flashcards to mix them up
   flashcards.shuffle();
 
   return flashcards;

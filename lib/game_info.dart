@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:math_for_kids/welcome_page.dart';
 
 class GameInfoPage extends StatelessWidget {
   const GameInfoPage({super.key});
@@ -78,7 +77,7 @@ class GameInfoPage extends StatelessWidget {
                 ),
                 SizedBox(height: 16),
                 Text(
-                  'Developed by Venz Jan A. Cabonegro',
+                  'Developed by Ashish Singh',
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
@@ -90,114 +89,6 @@ class GameInfoPage extends StatelessWidget {
           ),
         ),
       ),
-      // bottomNavigationBar: BottomAppBar(
-      //   color: Color(0xFFADD8E6),
-      //   child: Container(
-      //     height: 60.0,
-      //     padding: EdgeInsets.symmetric(
-      //         horizontal: 20.0
-      //         ),
-      //     child: Row(
-      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //       children: [
-      //         ElevatedButton(
-      //           onPressed: () {
-      //             Navigator.push(
-      //               context,
-      //               MaterialPageRoute(
-      //                 builder: (context) => WelcomePage(),
-      //               ),
-      //             );
-      //           },
-      //           style: ElevatedButton.styleFrom(
-      //             backgroundColor: Color(0xFFADD8E6),
-      //             shape: RoundedRectangleBorder(
-      //               borderRadius: BorderRadius.circular(8.0),
-      //             ),
-      //             padding: EdgeInsets.all(15.0),
-      //           ),
-      //           child: Column(
-      //             children: [
-      //               Icon(
-      //                 Icons.home,
-      //                 color: Color(0xFF001F3F),
-      //                 size: 24.0,
-      //               ),
-      //               Text(
-      //                 'Home',
-      //                 style: TextStyle(
-      //                   fontSize: 12.0,
-      //                   color: Color(0xFF001F3F),
-      //                 ),
-      //               ),
-      //             ],
-      //           ),
-      //         ),
-      //         ElevatedButton(
-      //           onPressed: () {
-      //             // Navigator.push(
-      //             //   context,
-      //             //   MaterialPageRoute(
-      //             //     builder: (context) => GameInfoPage(),
-      //             //   ),
-      //             // );
-      //           },
-      //           style: ElevatedButton.styleFrom(
-      //             backgroundColor: Color(0xFFADD8E6),
-      //             shape: RoundedRectangleBorder(
-      //               borderRadius: BorderRadius.circular(8.0),
-      //             ),
-      //             padding: EdgeInsets.all(15.0),
-      //           ),
-      //           child: Column(
-      //             children: [
-      //               Icon(
-      //                 Icons.info,
-      //                 color: Color(0xFF001F3F),
-      //                 size: 24.0,
-      //               ),
-      //               Text(
-      //                 'Game Info',
-      //                 style: TextStyle(
-      //                   fontSize: 12.0,
-      //                   color: Color(0xFF001F3F),
-      //                 ),
-      //               ),
-      //             ],
-      //           ),
-      //         ),
-      //         ElevatedButton(
-      //           onPressed: () {
-      //             Navigator.pop(context);
-      //           },
-      //           style: ElevatedButton.styleFrom(
-      //             backgroundColor: Color(0xFFADD8E6),
-      //             shape: RoundedRectangleBorder(
-      //               borderRadius: BorderRadius.circular(8.0),
-      //             ),
-      //             padding: EdgeInsets.all(15.0),
-      //           ),
-      //           child: Column(
-      //             children: [
-      //               Icon(
-      //                 Icons.arrow_back,
-      //                 color: Color(0xFF001F3F),
-      //                 size: 24.0,
-      //               ),
-      //               Text(
-      //                 'Back',
-      //                 style: TextStyle(
-      //                   fontSize: 12.0,
-      //                   color: Color(0xFF001F3F),
-      //                 ),
-      //               ),
-      //             ],
-      //           ),
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
     );
   }
 }

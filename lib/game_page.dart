@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:math_for_kids/game_info.dart';
 import 'package:math_challenge_app/welcome_page.dart';
-import 'dart:async'; // Add this import
+import 'dart:async';
 import 'flashcard_generator.dart';
 import 'variety_page.dart';
 
@@ -27,14 +26,14 @@ class _GamePageState extends State<GamePage> {
   late List<Flashcard> flashcards;
   int currentFlashcardIndex = 0;
   int score = 0;
-  late Timer timer; // for Single-Level Mode
-  int timeRemaining = 0; // for Single-Level Mode
+  late Timer timer;
+  int timeRemaining = 0;
   bool isTimeUp = false;
   TextEditingController answerController = TextEditingController();
   int lastDifficultyIncreaseScore = 0;
-  late Timer speedModeTimer; // Timer for Speed Mode
+  late Timer speedModeTimer;
   int speedModeTimeRemaining =
-      10; // Time limit for each flashcard in Speed Mode
+      10;
 
   @override
   void initState() {
@@ -55,21 +54,16 @@ class _GamePageState extends State<GamePage> {
     if (widget.gameMode == 'Speed Mode') {
       startSpeedModeTimer();
     } else if (widget.gameMode == 'Single Level') {
-      // Set the time for Single-Level Mode
-      //timeRemaining = 120;
       timeRemaining = widget.timeLimit ?? 120;
-      // Start the timer
       timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
         setState(() {
           if (timeRemaining > 0) {
             timeRemaining--;
-            // Increase difficulty every 5 points in Infinite mode
             if (widget.gameMode == 'Infinite' && score % 5 == 0) {
               lastDifficultyIncreaseScore = score;
               increaseDifficulty();
             }
           } else {
-            // Time is up, end the game
             timer.cancel();
             showResults();
           }
@@ -94,7 +88,7 @@ class _GamePageState extends State<GamePage> {
   void increaseDifficulty() {
     setState(() {
       int difficultyFactor =
-          (score ~/ 10) + 1; // Increase difficulty every 10 points
+          (score ~/ 10) + 1;
       for (var flashcard in flashcards) {
         switch (flashcard.variety) {
           case 'Addition':
@@ -125,9 +119,9 @@ class _GamePageState extends State<GamePage> {
       case 'Subtraction':
         return '-';
       case 'Multiplication':
-        return '×'; // Unicode character for multiplication
+        return '×';
       case 'Division':
-        return '÷'; // Unicode character for division
+        return '÷';
       default:
         return '';
     }
@@ -146,14 +140,12 @@ class _GamePageState extends State<GamePage> {
         updateGameDifficulty();
       });
     } else {
-      // If the answer is incorrect and the game mode is "Speed Mode", end the game immediately
       if (widget.gameMode == 'Speed Mode') {
         showResults();
         return;
       }
     }
 
-    // Reset the timer for the flashcard
     if (widget.gameMode == 'Single Level') {
       if (isTimeUp) {
         setState(() {
@@ -198,7 +190,6 @@ class _GamePageState extends State<GamePage> {
   bool hasShownResults = false;
   void showResults({bool bySurrender = false}) {
     if (hasShownResults) {
-      // Results have already been shown, avoid showing them again
       return;
     }
     setState(() {
@@ -206,17 +197,15 @@ class _GamePageState extends State<GamePage> {
       hasShownResults = true;
     });
 
-    // Show results only if time is up or by surrender
     if (!isTimeUp && !bySurrender) {
       return;
     }
 
     String remarks = getRemarks(score);
 
-    // Display results in an AlertDialog
     showDialog(
       barrierDismissible:
-          false, // Prevents closing the dialog by tapping outside
+          false,
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -229,7 +218,7 @@ class _GamePageState extends State<GamePage> {
             ),
           ),
           content: Column(
-            mainAxisSize: MainAxisSize.min, // Set to min to adjust size
+            mainAxisSize: MainAxisSize.min,
             children: [
               const Text(
                 'GOOD GAME!',
@@ -265,7 +254,6 @@ class _GamePageState extends State<GamePage> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    // Navigate to the variety selection page
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -276,7 +264,7 @@ class _GamePageState extends State<GamePage> {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
-                        const Color(0xFFFFA500), // Orange button color
+                        const Color(0xFFFFA500),
                   ),
                   child: const Text(
                     'PLAY AGAIN',
@@ -289,7 +277,6 @@ class _GamePageState extends State<GamePage> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    // Navigate to the home page (replace with your home page route)
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -299,7 +286,7 @@ class _GamePageState extends State<GamePage> {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
-                        const Color(0xFFFFA500), // Orange button color
+                        const Color(0xFFFFA500),
                   ),
                   child: const Text(
                     'HOME',
@@ -314,7 +301,7 @@ class _GamePageState extends State<GamePage> {
             ),
           ],
           contentPadding:
-              const EdgeInsets.all(16.0), // Adjust padding as needed
+              const EdgeInsets.all(16.0),
         );
       },
     );
@@ -335,9 +322,8 @@ class _GamePageState extends State<GamePage> {
 
   void updateGameDifficulty() {
     if (widget.gameMode == 'Infinite' && score >= 20 && !isTimeUp) {
-      // Start a timer for Infinite mode after score reaches 20
       if (!timer.isActive) {
-        timeRemaining = 30; // Give 30 seconds
+        timeRemaining = 30;
         timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
           setState(() {
             if (timeRemaining > 0) {
@@ -355,7 +341,7 @@ class _GamePageState extends State<GamePage> {
   @override
   void dispose() {
     if (widget.gameMode == 'Single Level') {
-      timer.cancel(); // Cancel the timer to avoid memory leaks
+      timer.cancel();
     }
     super.dispose();
   }
@@ -374,7 +360,7 @@ class _GamePageState extends State<GamePage> {
           child: Card(
             margin: const EdgeInsets.all(10),
             color: const Color.fromRGBO(
-                38, 148, 221, 0.493), // Light Blue background color
+                38, 148, 221, 0.493),
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
@@ -399,7 +385,7 @@ class _GamePageState extends State<GamePage> {
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'BubblegumSans',
                                   color: Color(
-                                      0xFF001F3F), // Dark Navy Blue text color
+                                      0xFF001F3F),
                                 ),
                               ),
                               const SizedBox(height: 10),
@@ -410,7 +396,7 @@ class _GamePageState extends State<GamePage> {
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'BubblegumSans',
                                   color: Color(
-                                      0xFF006400), // Dark Green equation color
+                                      0xFF006400),
                                 ),
                               ),
                             ],
@@ -420,21 +406,18 @@ class _GamePageState extends State<GamePage> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  // Conditional rendering based on game mode
                   widget.gameMode == 'Infinite'
                       ? TextField(
-                          controller: answerController, // Use the controller
+                          controller: answerController,
                           keyboardType: TextInputType.number,
                           inputFormatters: [
                             FilteringTextInputFormatter.digitsOnly
                           ],
                           onChanged: (value) {
-                            // Handle input changes if needed
                           },
                           onSubmitted: (value) {
-                            // Check the answer when the player submits
                             checkAnswer(int.parse(value));
-                            answerController.clear(); // Clear the TextField
+                            answerController.clear();
                           },
                           style: const TextStyle(
                             fontSize: 25,
@@ -452,12 +435,11 @@ class _GamePageState extends State<GamePage> {
                           ),
                         )
                       : GridView.builder(
-                          // GridView for multiple choice buttons
                           shrinkWrap: true,
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount:
-                                6, // Set crossAxisCount to 6 for a horizontal line
+                                6,
                             crossAxisSpacing: 10.0,
                             mainAxisSpacing: 10.0,
                           ),
@@ -467,7 +449,7 @@ class _GamePageState extends State<GamePage> {
                           itemBuilder: (context, index) => Card(
                             elevation: 3,
                             color:
-                                const Color(0xFF006400), // Orange button color
+                                const Color(0xFF006400),
                             child: InkWell(
                               onTap: () => checkAnswer(
                                   flashcards[currentFlashcardIndex]
@@ -481,7 +463,7 @@ class _GamePageState extends State<GamePage> {
                                     fontSize: 25,
                                     fontFamily: 'BubblegumSans',
                                     color: Color.fromARGB(255, 247, 247,
-                                        247), // Dark Navy Blue text color
+                                        247),
                                   ),
                                 ),
                               ),
@@ -490,7 +472,6 @@ class _GamePageState extends State<GamePage> {
                         ),
 
                   const SizedBox(height: 20),
-// Improved Score Board Design
                   Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 10),
@@ -508,11 +489,11 @@ class _GamePageState extends State<GamePage> {
                     ),
                     child: Row(
                       mainAxisAlignment:
-                          MainAxisAlignment.center, // Center the contents
+                          MainAxisAlignment.center,
                       children: [
                         Column(
                           crossAxisAlignment:
-                              CrossAxisAlignment.center, // Center the text
+                              CrossAxisAlignment.center,
                           children: [
                             Column(
                               children: [
@@ -533,12 +514,11 @@ class _GamePageState extends State<GamePage> {
                                     fontFamily: 'BubblegumSans',
                                     color: Color(
                                       0xFF001F3F,
-                                    ), // Dark Navy Blue text color
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
-                            // Display time remaining only for Single Level and Speed Mode
                             if (widget.gameMode == 'Single Level' ||
                                 widget.gameMode == 'Speed Mode')
                               Row(
@@ -565,7 +545,7 @@ class _GamePageState extends State<GamePage> {
                                       fontFamily: 'BubblegumSans',
                                       color: Color(
                                         0xFF001F3F,
-                                      ), // Dark Navy Blue text color
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -577,16 +557,15 @@ class _GamePageState extends State<GamePage> {
                   ),
 
                   const SizedBox(height: 20),
-                  //if (widget.gameMode == 'Infinite')
                   ElevatedButton(
                     onPressed: () {
                       showResults(
                           bySurrender:
-                              true); // Display results when the player surrenders
+                              true);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
-                          Colors.orange, // Orange surrender button color
+                          Colors.orange,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.all(15),
                       textStyle: const TextStyle(
