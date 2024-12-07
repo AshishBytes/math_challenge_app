@@ -47,7 +47,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         ),
                         const SizedBox(height: 24.0),
                         const Text(
-                          'Welcome to Math Flashcards!',
+                          'Welcome to Math Challenge!',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 28,
