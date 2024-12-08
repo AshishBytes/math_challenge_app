@@ -30,7 +30,6 @@ class Flashcard {
         correctAnswer = operand1 ~/ operand2;
         break;
       default:
-        // Handle unknown variety (optional)
         correctAnswer = 0;
     }
   }
@@ -39,7 +38,7 @@ class Flashcard {
     List<int> possibleAnswers = [correctAnswer];
 
     while (possibleAnswers.length < 6) {
-      int randomAnswer = Random().nextInt(99) + 1; // Change the range as needed
+      int randomAnswer = Random().nextInt(99) + 1;
 
       if (!possibleAnswers.contains(randomAnswer)) {
         possibleAnswers.add(randomAnswer);
@@ -55,7 +54,6 @@ class Flashcard {
     switch (variety) {
       case 'Addition':
         if (difficultyFactor > 3 && random.nextBool()) {
-          // Introduce triple addition for higher difficulties
           int operand3 = random.nextInt(20) + 1;
           operand1 = (operand1 + operand3) * difficultyFactor;
           correctAnswer = operand1 + operand2 + operand3;
@@ -63,7 +61,6 @@ class Flashcard {
         break;
       case 'Multiplication':
         if (difficultyFactor > 2 && random.nextBool()) {
-          // Introduce simple square numbers
           operand1 = random.nextInt(12) + 1;
           operand2 = operand1;
           correctAnswer = operand1 * operand2;
@@ -71,7 +68,6 @@ class Flashcard {
         break;
       case 'Division':
         if (difficultyFactor > 3 && random.nextBool()) {
-          // Introduce remainders for higher difficulties
           int dividend = (random.nextInt(50) + 50) * difficultyFactor;
           int divisor = random.nextInt(10) + 2;
           operand1 = dividend;
@@ -117,7 +113,7 @@ List<Flashcard> generateMultiplicationFlashcards(int numberOfFlashcards) {
   List<Flashcard> flashcards = [];
 
   for (int i = 0; i < numberOfFlashcards; i++) {
-    int operand1 = Random().nextInt(10) + 1; // Keep the range smaller if needed
+    int operand1 = Random().nextInt(10) + 1;
     int operand2 = Random().nextInt(10) + 1;
 
     flashcards.add(Flashcard(

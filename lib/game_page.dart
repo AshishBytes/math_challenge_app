@@ -306,7 +306,7 @@ class _GamePageState extends State<GamePage> {
       },
     );
     if (widget.gameMode == 'Single Level') {
-      timer.cancel(); // Stop the timer
+      timer.cancel();
     }
   }
 
